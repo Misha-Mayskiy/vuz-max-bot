@@ -45,6 +45,63 @@ def get_all_subjects(db: Session, university_id: int) -> List[models.Subject]:
         models.Subject.name).all()
 
 
+def update_group(db: Session, group_id: int, university_id: int, name: str) -> Optional[models.Group]:
+    db_obj = db.query(models.Group).filter(models.Group.id == group_id,
+                                           models.Group.university_id == university_id).first()
+    if db_obj:
+        db_obj.name = name
+        db.commit()
+        db.refresh(db_obj)
+    return db_obj
+
+
+def update_teacher(db: Session, teacher_id: int, university_id: int, full_name: str) -> Optional[models.Teacher]:
+    db_obj = db.query(models.Teacher).filter(models.Teacher.id == teacher_id,
+                                             models.Teacher.university_id == university_id).first()
+    if db_obj:
+        db_obj.full_name = full_name
+        db.commit()
+        db.refresh(db_obj)
+    return db_obj
+
+
+def update_subject(db: Session, subject_id: int, university_id: int, name: str) -> Optional[models.Subject]:
+    db_obj = db.query(models.Subject).filter(models.Subject.id == subject_id,
+                                             models.Subject.university_id == university_id).first()
+    if db_obj:
+        db_obj.name = name
+        db.commit()
+        db.refresh(db_obj)
+    return db_obj
+
+
+def delete_group(db: Session, group_id: int, university_id: int) -> Optional[models.Group]:
+    db_obj = db.query(models.Group).filter(models.Group.id == group_id,
+                                           models.Group.university_id == university_id).first()
+    if db_obj:
+        db.delete(db_obj)
+        db.commit()
+    return db_obj
+
+
+def delete_teacher(db: Session, teacher_id: int, university_id: int) -> Optional[models.Teacher]:
+    db_obj = db.query(models.Teacher).filter(models.Teacher.id == teacher_id,
+                                             models.Teacher.university_id == university_id).first()
+    if db_obj:
+        db.delete(db_obj)
+        db.commit()
+    return db_obj
+
+
+def delete_subject(db: Session, subject_id: int, university_id: int) -> Optional[models.Subject]:
+    db_obj = db.query(models.Subject).filter(models.Subject.id == subject_id,
+                                             models.Subject.university_id == university_id).first()
+    if db_obj:
+        db.delete(db_obj)
+        db.commit()
+    return db_obj
+
+
 # --- CRUD для расписания ---
 def get_schedule_events(
         db: Session, university_id: int, group_id: Optional[int] = None, teacher_id: Optional[int] = None,
@@ -71,7 +128,7 @@ def create_schedule_event(db: Session, event: schemas.ScheduleEventCreate, unive
 
 
 def update_schedule_event(db: Session, event_id: int, event_update: schemas.ScheduleEventCreate, university_id: int) -> \
-Optional[models.ScheduleEvent]:
+        Optional[models.ScheduleEvent]:
     db_event = db.query(models.ScheduleEvent).filter(models.ScheduleEvent.id == event_id,
                                                      models.ScheduleEvent.university_id == university_id).first()
     if db_event:
