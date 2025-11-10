@@ -22,5 +22,6 @@ def login_for_access_token(
             detail="Incorrect username or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    access_token = create_access_token(subject=user.username)
+    token_data = {"sub": user.username, "uni_id": user.university_id}
+    access_token = create_access_token(subject_data=token_data)
     return {"access_token": access_token, "token_type": "bearer"}

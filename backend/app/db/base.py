@@ -1,3 +1,4 @@
 from app.db.base_class import Base
+from app.models.university import University
 from app.models.user import User
 from app.models.schedule import Group, Teacher, Subject, ScheduleEvent

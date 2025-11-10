@@ -13,7 +13,8 @@ def create_user(db: Session, user: UserCreate) -> User:
     db_user = User(
         username=user.username,
         hashed_password=hashed_password,
-        is_admin=user.is_admin
+        role=user.role,
+        university_id=user.university_id
     )
     db.add(db_user)
     db.commit()

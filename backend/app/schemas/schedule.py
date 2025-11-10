@@ -2,12 +2,14 @@ from pydantic import BaseModel
 from datetime import datetime
 
 
+# --- Схемы для справочников ---
 class GroupBase(BaseModel):
     name: str
 
 
 class Group(GroupBase):
     id: int
+    university_id: int
 
     class Config:
         from_attributes = True
@@ -19,6 +21,7 @@ class TeacherBase(BaseModel):
 
 class Teacher(TeacherBase):
     id: int
+    university_id: int
 
     class Config:
         from_attributes = True
@@ -30,11 +33,13 @@ class SubjectBase(BaseModel):
 
 class Subject(SubjectBase):
     id: int
+    university_id: int
 
     class Config:
         from_attributes = True
 
 
+# --- Схемы для расписания ---
 class ScheduleEventBase(BaseModel):
     start_time: datetime
     end_time: datetime
@@ -50,6 +55,7 @@ class ScheduleEventCreate(ScheduleEventBase):
 
 class ScheduleEvent(ScheduleEventBase):
     id: int
+    university_id: int
     subject: Subject
     teacher: Teacher
     group: Group

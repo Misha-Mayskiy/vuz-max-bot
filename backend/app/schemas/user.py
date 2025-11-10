@@ -1,4 +1,6 @@
 from pydantic import BaseModel
+from app.models.user import UserRole
+from .university import University
 
 
 class UserBase(BaseModel):
@@ -7,12 +9,14 @@ class UserBase(BaseModel):
 
 class UserCreate(UserBase):
     password: str
-    is_admin: bool = False
+    role: UserRole
+    university_id: int | None = None
 
 
 class UserInDB(UserBase):
     id: int
-    is_admin: bool
+    role: UserRole
+    university: University | None = None
 
     class Config:
         from_attributes = True

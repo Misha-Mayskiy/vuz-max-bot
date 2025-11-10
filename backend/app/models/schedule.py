@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, UniqueConstraint
 from sqlalchemy.orm import relationship
 from app.db.base_class import Base
 
@@ -6,19 +6,23 @@ from app.db.base_class import Base
 class Group(Base):
     __tablename__ = "groups"
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, unique=True, index=True)
+    name = Column(String, index=True, nullable=False)
+    university_id = Column(Integer, ForeignKey("universities.id"), nullable=False)
+    __table_args__ = (UniqueConstraint('name', 'university_id', name='_name_university_uc'),)
 
 
 class Teacher(Base):
     __tablename__ = "teachers"
     id = Column(Integer, primary_key=True, index=True)
-    full_name = Column(String, index=True)
+    full_name = Column(String, index=True, nullable=False)
+    university_id = Column(Integer, ForeignKey("universities.id"), nullable=False)
 
 
 class Subject(Base):
     __tablename__ = "subjects"
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, index=True)
+    name = Column(String, index=True, nullable=False)
+    university_id = Column(Integer, ForeignKey("universities.id"), nullable=False)
 
 
 class ScheduleEvent(Base):
@@ -31,6 +35,7 @@ class ScheduleEvent(Base):
     subject_id = Column(Integer, ForeignKey("subjects.id"))
     teacher_id = Column(Integer, ForeignKey("teachers.id"))
     group_id = Column(Integer, ForeignKey("groups.id"))
+    university_id = Column(Integer, ForeignKey("universities.id"), nullable=False)
 
     subject = relationship("Subject")
     teacher = relationship("Teacher")
