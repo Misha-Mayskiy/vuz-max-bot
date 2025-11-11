@@ -6,13 +6,13 @@
 
 1. **Клонируйте репозиторий:**
    ```bash
-   git clone <ссылка_на_ваш_репо>
-   cd <папка_проекта>
+   git clone https://github.com/Misha-Mayskiy/vuz-max-bot.git
+   cd vuz-max-bot
    ```
 
-2. **Соберите и запустите контейнер:**
+2. **Соберите и запустите контейнеры:**
    ```bash
-   docker-compose up --build
+   docker compose up --build
    ```
 
 3. **Доступ к API:**
