@@ -9,3 +9,12 @@ services:
     environment:
       - SECRET_KEY=dev_secret_key
     restart: unless-stopped
+  frontend:
+    build: ./frontend
+    container_name: vususlugi_frontend
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+    stdin_open: true
+    tty: true
