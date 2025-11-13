@@ -1,5 +1,4 @@
 import { ReactNode, useEffect } from 'react';
-import { Button, Flex } from '@maxhub/max-ui';
 import Card from './Card';
 
 interface ModalProps {
