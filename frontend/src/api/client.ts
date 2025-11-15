@@ -30,7 +30,6 @@ class ApiClient {
       },
     });
 
-    // Add auth token to requests
     this.client.interceptors.request.use((config) => {
       const token = localStorage.getItem('access_token');
       if (token) {
@@ -39,7 +38,6 @@ class ApiClient {
       return config;
     });
 
-    // Handle 401 errors
     this.client.interceptors.response.use(
       (response) => response,
       (error: AxiosError) => {
@@ -52,7 +50,6 @@ class ApiClient {
     );
   }
 
-  // Auth
   async login(username: string, password: string): Promise<Token> {
     const formData = new URLSearchParams();
     formData.append('username', username);
@@ -67,7 +64,6 @@ class ApiClient {
     return response.data;
   }
 
-  // Super Admin
   async createUniversity(data: UniversityCreate): Promise<University> {
     const response = await this.client.post<University>('/api/superadmin/universities/', data);
     return response.data;
@@ -78,7 +74,6 @@ class ApiClient {
     return response.data;
   }
 
-  // University Admin - Groups
   async createGroup(data: GroupBase): Promise<Group> {
     const response = await this.client.post<Group>('/api/university/groups/', data);
     return response.data;
@@ -93,7 +88,6 @@ class ApiClient {
     await this.client.delete(`/api/university/groups/${groupId}`);
   }
 
-  // University Admin - Teachers
   async createTeacher(data: TeacherBase): Promise<Teacher> {
     const response = await this.client.post<Teacher>('/api/university/teachers/', data);
     return response.data;
@@ -108,7 +102,6 @@ class ApiClient {
     await this.client.delete(`/api/university/teachers/${teacherId}`);
   }
 
-  // University Admin - Subjects
   async createSubject(data: SubjectBase): Promise<Subject> {
     const response = await this.client.post<Subject>('/api/university/subjects/', data);
     return response.data;
@@ -123,7 +116,6 @@ class ApiClient {
     await this.client.delete(`/api/university/subjects/${subjectId}`);
   }
 
-  // Schedule Management
   async createScheduleEvent(data: ScheduleEventCreate): Promise<ScheduleEvent> {
     const response = await this.client.post<ScheduleEvent>('/api/schedule/', data);
     return response.data;
@@ -138,7 +130,6 @@ class ApiClient {
     await this.client.delete(`/api/schedule/${eventId}`);
   }
 
-  // Data Retrieval
   async getSchedule(params?: {
     group_id?: number | null;
     teacher_id?: number | null;

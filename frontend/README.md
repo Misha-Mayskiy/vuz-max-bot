@@ -12,36 +12,6 @@
 - Axios
 - date-fns
 
-## Установка
-
-```bash
-npm install
-```
-
-## Настройка
-
-Создайте файл `.env` на основе `.env.example`:
-
-```bash
-cp .env.example .env
-```
-
-Укажите URL вашего бэкенда в переменной `VITE_API_BASE_URL`.
-
-## Запуск
-
-```bash
-npm run dev
-```
-
-Приложение будет доступно по адресу `http://localhost:3000`
-
-## Сборка
-
-```bash
-npm run build
-```
-
 ## Функционал
 
 - **Аутентификация**: Вход в систему через OAuth2
@@ -59,6 +29,7 @@ npm run build
 src/
 ├── api/           # API клиент
 ├── contexts/      # React контексты (Auth)
+├── components/    # Кастомные компоненты
 ├── pages/         # Страницы приложения
 ├── types/         # TypeScript типы
 ├── App.tsx        # Главный компонент с роутингом

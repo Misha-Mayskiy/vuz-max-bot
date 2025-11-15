@@ -17,7 +17,6 @@ body {
   width: 100%;
 }
 
-/* Обеспечиваем черный текст для option элементов на белом фоне */
 select option {
   color: #000000;
   background-color: #ffffff;

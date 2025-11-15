@@ -1,5 +1,3 @@
-// API Types based on OpenAPI schema
-
 export type UserRole = 'super_admin' | 'university_admin';
 
 export interface Token {
